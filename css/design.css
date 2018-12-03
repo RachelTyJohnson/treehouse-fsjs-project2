@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Varela+Round');
+
 body{
-  background-color: #e1f1f6;
-  font-family: Helvetica, sans-serif;
+  background-color: #bde5be;
+  background-image:url('../background.jpg');
+  background-attachment: fixed;
+  font-family: 'Varela Round', sans-serif;
   color: #222;
 }
 
@@ -39,7 +43,7 @@ body{
       border: 1px solid #eaeaea;
       padding: 8px 15px;
       font-size: 14px;
-      background-color: #4ba6c3;
+      background-color: #389b46;
       color: #fff
     }
 
@@ -67,7 +71,7 @@ body{
       .student-details h3{
         margin: 4px 0 2px 0;
         font-weight: bold;
-        color: #4ba6c3;
+        color: #389b46;
       }
 
       .student-details .email{
@@ -99,7 +103,7 @@ body{
   margin: 40px 0 0 0;
   text-align: center;
 }
- 
+
   .pagination li{
     display: inline;
   }
@@ -109,11 +113,11 @@ body{
       border-radius: 5px;
       padding: 3px 8px;
       text-decoration: none;
-      color: #4ba6c3;
+      color: #389b46;
     }
 
     .pagination li a.active,
     .pagination li a:hover{
-      background-color: #4ba6c3;
+      background-color: #389b46;
       color: #fff;
     }
