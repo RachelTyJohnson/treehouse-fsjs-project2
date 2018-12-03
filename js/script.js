@@ -1,50 +1,95 @@
-/******************************************
-Treehouse Techdegree:
-FSJS project 2 - List Filter and Pagination
-******************************************/
-   
-// Study guide for this project - https://drive.google.com/file/d/1OD1diUsTMdpfMDv677TfL1xO2CEkykSz/view?usp=sharing
+//global variables
+const studentList = document.querySelector('.student-list');
+const listItems = document.querySelectorAll('.student-item')
+const pageContainer = document.querySelector('.page');
+const pageHeader = document.querySelector('.page-header');
+const len = listItems.length;
+let pages = Math.ceil(len/10);
 
 
-/*** 
-   Add your global variables that store the DOM elements you will 
-   need to reference and/or manipulate. 
-   
-   But be mindful of which variables should be global and which 
-   should be locally scoped to one of the two main functions you're 
-   going to create. A good general rule of thumb is if the variable 
-   will only be used inside of a function, then it can be locally 
-   scoped to that function.
+//*************************************************************
+
+// showPage function to hide items except for 10
+function showPage(page){
+
+  //hide all list listItems
+  for (let i=0; i<listItems.length; i++){
+    listItems[i].style.display="none";
+  }
+
+  //display list items of the page
+  //logic: (PAGE-1)*10 + display
+
+    if (page!=pages){
+      for (let i=0; i<10; i++){
+        listItems[(page-1)*10 + i].style.display="list-item";
+      }
+    } else { //if it's the last page
+      //figure out how many items on the last page.
+      const leftover = len%10;
+      for (let i=0; i<leftover; i++){
+        listItems[(page-1)*10 + i].style.display="list-item";
+      }
+    }
+  }
+
+//*************************************************************
+
+//appendPagesLinks function to add pagination functionality
+function appendPageLinks(){
+
+  //generate the pagination
+  let pageString = `<div class="pagination"><ul>`;
+  pageString += `<li><a class="active" href="#">1</a></li>`;
+  for (let i=1; i<pages; i++){
+    pageString += `<li><a href="#">${i+1}</a></li>`;
+  }
+  pageString += `</ul></div>`;
+  pageContainer.insertAdjacentHTML('beforeend', pageString);
+
+  //add functionality to each page link
+  const paginationContainer = document.querySelector('.pagination');
+  paginationContainer.addEventListener('click', (e)=>{
+    if (e.target.tagName=="A"){
+      //prevent Default Action of jumping
+      e.preventDefault();
+
+      //get the page selected and show that page
+      const pageSelected = e.target.innerHTML;
+      showPage(pageSelected);
+
+      //remove active class from all
+      const paginationLinks = document.querySelectorAll('.pagination a');
+      for (let i=0; i<paginationLinks.length; i++){
+        paginationLinks[i].classList.remove('active');
+      }
+      //add active class to clicked
+      paginationLinks[pageSelected-1].classList.add('active');
+
+    }
+  });
+};
+
+//*************************************************************
+
+//Add search component
+/***
+Insert before end of .page-header
 ***/
 
+let searchString = `
+<div class="student-search">
+  <input placeholder="Search for students...">
+  <button>Search</button>
+</div>
+`;
 
 
 
-/*** 
-   Create the `showPage` function to hide all of the items in the 
-   list except for the ten you want to show.
-
-   Pro Tips: 
-     - Keep in mind that with a list of 54 students, the last page 
-       will only display four.
-     - Remember that the first student has an index of 0.
-     - Remember that a function `parameter` goes in the parens when 
-       you initially define the function, and it acts as a variable 
-       or a placeholder to represent the actual function `argument` 
-       that will be passed into the parens later when you call or 
-       "invoke" the function 
-***/
+pageHeader.insertAdjacentHTML('beforeend', searchString);
 
 
 
-
-/*** 
-   Create the `appendPageLinks function` to generate, append, and add 
-   functionality to the pagination buttons.
-***/
-
-
-
-
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
+//initialise page 1 on load
+showPage(1);
+appendPageLinks();
