@@ -18,6 +18,10 @@ body{
 
 .page-header{
   margin-bottom: 50px;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
   .page-header h2{
     float: left;
@@ -25,11 +29,18 @@ body{
     text-transform: uppercase;
     font-weight: bold;
     color: #555;
+    margin-bottom:20px;
   }
 
-  .page-header .student-search{
-    float: right;
+  @media (min-width:768px){
+    .page-header{
+      flex-direction:row;
+    }
+    .page-header h2{
+      margin-bottom:0;
+    }
   }
+
 
     .page-header .student-search input{
       border-radius: 5px;
@@ -44,8 +55,14 @@ body{
       padding: 8px 15px;
       font-size: 14px;
       background-color: #389b46;
-      color: #fff
+      color: #fff;
     }
+
+.errormessage{
+  text-align:center;
+  font-weight:bold;
+  font-size:2em;
+}
 
 .student-list{}
 
